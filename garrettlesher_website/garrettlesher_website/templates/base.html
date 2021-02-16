@@ -17,21 +17,61 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+        {# favicon #}
+        <link rel="icon" type="image/svg" href="../media/images/logo.svg"/>
+
+        {# google monda font #}
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Monda:wght@400;700&display=swap" rel="stylesheet">
+
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/garrettlesher_website.css' %}">
+        <!-- bootstrap 5.0 css -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <!-- RawHTMLBlock highlighting css stylesheet -->
+        <link href="{% static 'css/prism.css' %}" rel="stylesheet" />
+        
 
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
         {% endblock %}
     </head>
 
-    <body class="{% block body_class %}{% endblock %}">
+    <body class="body {% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
+        <nav>
+            <div class="logo">
+                <a href="/"><img alt="logo" src="{% static '../media/images/logo.svg' %}"></a>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="/">Profile</a>
+                </li>
+                <li>
+                    <a href="#">Work</a>
+                </li>
+                <li>
+                    <a href="/insights/">Insights</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+            <div class="burger">
+                <div class="line-1"></div>
+                <div class="line-2"></div>
+                <div class="line-3"></div>
+            </div>
+        </nav>
 
         {% block content %}{% endblock %}
 
         {# Global javascript #}
+        <!-- bootstrap 5.0 js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
         <script type="text/javascript" src="{% static 'js/garrettlesher_website.js' %}"></script>
+        <!-- RawHTMLBlock highlighting js -->
+        <script src="{% static 'js/prism.js' %}"></script>
 
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}

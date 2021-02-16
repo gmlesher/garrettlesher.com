@@ -1,0 +1,132 @@
+/* Global Styles */
+.body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #414141;
+  color: white;
+  font-family: 'Monda', sans-serif;
+}
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 8vh;
+  background-color: transparent;
+}
+.logo {
+  padding-top: 25px;
+}
+.nav-links {
+  padding-top: 25px;
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+  font-weight: 700;
+}
+.nav-links li {
+  list-style: none;
+  position: relative;
+}
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+.nav-links a:hover {
+  color: white;
+}
+.nav-links a::before {
+  content: "";
+  display: block;
+  height: 5px;
+  width: 100%;
+  border-radius: 10px;
+  background-color: #D91919;
+  position: absolute;
+  top: -5px;
+  width: 0%;
+  transition: all ease-in-out 250ms;
+}
+.nav-links a:hover::before {
+  width: 100%;
+}
+.burger {
+  display: none;
+  cursor: pointer;
+}
+.burger div {
+  width: 30px;
+  height: 3px;
+  background-color: white;
+  margin: 6px;
+  transition: all 0.3s ease
+}
+
+@media screen and (max-width: 1024px) {
+  .nav-links {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+  .nav-links {
+    background-color: rgba(0, 48, 96, 0.75);
+    border-radius: 75px;
+    position: absolute;
+    right: 0px;
+    height: 92vh;
+    top: 8vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out;
+  }
+  .nav-links li {
+    opacity: 0;
+  }
+  .burger {
+    display: block;
+  }
+}
+
+.nav-active {
+  transform: translateX(0%);
+}
+
+@keyframes navLinkFade {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+/*@keyframes navLinkReverseFade {
+  from {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+}*/
+.toggle .line-1 {
+  transform: rotate(-45deg) translate(-6px, 6px);
+}
+.toggle .line-2 {
+  opacity: 0;
+}
+.toggle .line-3 {
+  transform: rotate(45deg) translate(-6px, -6px);
+}

@@ -7,6 +7,8 @@ from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.rich_text import RichText
 from wagtail.core import blocks
+from wagtail.core.blocks import RawHTMLBlock, BlockQuoteBlock 
+from wagtail.embeds.blocks import EmbedBlock
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel, StreamFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.blocks import ImageChooserBlock
@@ -43,6 +45,9 @@ class InsightsPage(Page):
         ('heading', blocks.CharBlock(form_classname="full title")),
         ('paragraph', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
+        ('raw_HTML', RawHTMLBlock()),
+        ('block_quote', BlockQuoteBlock()),
+        ('embed', EmbedBlock()),
     ])
     tags = ClusterTaggableManager(through=InsightsPageTag, blank=True)
     categories = ParentalManyToManyField('insights.InsightsCategory', blank=True)

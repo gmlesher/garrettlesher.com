@@ -1,12 +1,36 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home_page.css' %}">
+{% endblock %}
 
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-  <a href="/insights/">Insights</a>
-    {{ page.body|richtext }}
+  <div class="nameDesc">
+    {% for block in page.body %}
+      {% if block.block_type == 'name' %}
+        <h1>{{ block.value }}</h1>
+      {% elif block.block_type == 'description' %}
+        <h4>{{ block.value }}</h4>
+      {% endif %}
+    {% endfor %}
+
+    <a class="contactMe" href="#">
+      <div class="contactMe">
+        <p>Contact Me</p>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="homePageImg">
+    {% for block in page.body %}
+      {% if block.block_type == 'image' %}
+        {% include_block block %}
+      {% endif %}
+    {% endfor %}
+  </div>
+
 {% endblock %}
-
-
-
