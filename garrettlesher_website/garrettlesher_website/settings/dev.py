@@ -1,10 +1,13 @@
 from .base import *
+rom __future__ import absolute_import, unicode_literals
+import os
+
+# SECURITY WARNING: keep the secret key used in production secret!
+env = os.environ.copy()
+SECRET_KEY = env['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '7j4&yk8h=+3f0wqv7_wk3a9qhe&vkl=mhzm26kae*d4)0!&w&_'
 
 # SECURITY WARNING: define the correct hosts in production!
 ALLOWED_HOSTS = ['*'] 
