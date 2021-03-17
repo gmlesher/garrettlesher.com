@@ -2,7 +2,6 @@ from __future__ import absolute_import, unicode_literals
 from .base import *
 import dj_database_url
 import os
-import django_heorku
 
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
@@ -18,5 +17,3 @@ try:
     from .local import *
 except ImportError:
     pass
-
-django_heroku.settings(locals())
