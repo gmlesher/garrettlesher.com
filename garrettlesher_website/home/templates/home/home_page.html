@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags widget_tweaks %}
+
+{% block extra_js %}
+    <script src="{% static 'js/home_page.js' %}"></script>
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/home_page.css' %}">
+{% endblock %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="nameDesc">
+      {% for block in page.body %}
+        {% if block.block_type == 'name' %}
+          <h1>{{ block.value }}</h1>
+        {% elif block.block_type == 'description' %}
+          <h4>{{ block.value }}</h4>
+        {% endif %}
+      {% endfor %}
+
+      <a href="#contact" class="btn btn-lg contactMe">Contact Me</a>
+
+    </div>
+
+    <div class="homePageImg">
+      {% for block in page.body %}
+        {% if block.block_type == 'image' %}
+          {% include_block block %}
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="work" id="work">
+      <div class="row pb-5">
+        <div class="col-md-12">
+          <h1 class="mb-1 mb-md-2">Crafted solutions.</h1>
+          <a class="scroll-button" href="#projects">Show me the projects</a>
+        </div>
+      </div>
+      <div class="row pb-2 pb-sm-4 pb-md-7 pb-lg-9 pb-xl-11">
+        <div class="col-md-6">
+          <h2 class="headline mb-4">Clients</h2>
+          <p class="workText">
+            Great ideas aren’t industry specific. I work with clients of all scopes and sectors to create better experiences through design. Whether an adventurous startup or established global presence, the same level of detail and quality is delivered.
+          </p>
+          
+        </div>
+        <div class="col-md-6">
+          <h2 class="headline mb-4">Industries</h2>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="contact" id="contact">
+
+      <div class="w-50 py-5 formDiv">
+        <h1 class="mb-3 text-center">{{ page.form_title|richtext }}</h1>
+        <form class="row g-3 my-3 needs-validation contactForm" action="{% pageurl page %}" method="POST" novalidate>
+          {% csrf_token %}
+          
+          {% for field in form.visible_fields %}
+            {% if field.name == "first_name" %}
+              <div class="col-md-6">
+                {{ field.label_tag }}<br/>
+                <small>{{ field.help_text }}</small>
+                {% render_field field class+="form-control" %}
+                <div class="invalid-feedback">
+                  Please enter a {{ field.label_tag }}
+                </div>
+              </div> 
+            {% elif field.name == "last_name" %}
+              <div class="col-md-6">
+                {{ field.label_tag }}<br/>
+                <small>{{ field.help_text }}</small>
+                {% render_field field class+="form-control" %}
+                <div class="invalid-feedback">
+                  Please enter a {{ field.label_tag }}
+                </div>
+              </div>
+            {% else %}
+              <div class="col-12">
+                {{ field.label_tag }}<br/>
+                <small>{{ field.help_text }}</small>
+                {% render_field field class+="form-control" %}
+                <div class="invalid-feedback">
+                  {% if field.name == "email" %}
+                    Please enter a valid {{ field.label_tag }}
+                  {% else %}
+                    Please enter a {{ field.label_tag }}
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+
+          {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+          {% endfor %}
+
+            <div class="col-12 mb-3">
+              <button class="btn btn-primary" id="formSubmit" type="submit">Submit Form</button>
+            </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags widget_tweaks %}
+
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/home_page.css' %}">
+{% endblock %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="nameDesc">
+      {% for block in page.body %}
+        {% if block.block_type == 'name' %}
+          <h1>{{ block.value }}</h1>
+        {% elif block.block_type == 'description' %}
+          <h4>{{ block.value }}</h4>
+        {% endif %}
+      {% endfor %}
+
+      <a href="#contact" class="btn btn-lg contactMe">Contact Me</a>
+
+    </div>
+
+    <div class="homePageImg">
+      {% for block in page.body %}
+        {% if block.block_type == 'image' %}
+          {% include_block block %}
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="work" id="work">
+      <div class="row pb-5">
+        <div class="col-md-12">
+          <h1 class="mb-1 mb-md-2">Crafted Solutions.</h1>
+          <a class="scroll-button" href="#projects">Take me to the projects</a>
+        </div>
+      </div>
+      <div class="row pb-2 pb-sm-4 pb-md-7 pb-lg-9 pb-xl-11">
+        <div class="col-md-6">
+          <h2 class="headline mb-4">Clients</h2>
+          <p class="workText">
+            Great ideas aren’t industry specific. I work with clients of all scopes and sectors to create better experiences through design. Whether an adventurous startup or established global presence, the same level of detail and quality is delivered.
+          </p>
+          
+        </div>
+        <div class="col-md-6">
+          <h2 class="headline mb-4">Industries</h2>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="contact" id="contact">
+
+      <div class="w-50 py-5 pt-5 formDiv">
+        <h1 class="mb-3 text-center">{{ page.form_title|richtext }}</h1>
+        <div class="row g-3 my-3 text-center contactForm">
+          {{ page.thank_you_text|richtext }}
+ 
+            <div class="col-12 mb-3">
+              <a href="/" class="btn btn-primary">Profile</a>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

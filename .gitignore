@@ -1,5 +1,8 @@
 g_env/
 __pycache__/
+/static/
+/media/
+*.swp
 *.sqlite3
 .DS_Store
 .env

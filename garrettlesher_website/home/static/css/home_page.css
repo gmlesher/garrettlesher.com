@@ -1,0 +1,158 @@
+/* landing page name section */
+.nameDesc {
+  top: 0;
+  height: 100vh;
+  line-height: 100px;
+  z-index: -1;
+  /*background-color: blue;*/
+}
+.nameDesc h1 { /* my name */
+  position: absolute;
+  margin-left: -5px;
+  top: 45%;
+  transform: translateY(-60%);
+  font-weight: bold;
+  font-size: 4em;
+  background-color: var(--secTextColor);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.nameDesc h4 { /* my title */
+  position: absolute;
+  padding-top: 120px;
+  top: 45%;
+  transform: translateY(-60%);
+  font-size: 1.5em;
+  color: var(--mainTextColor);
+}
+.contactMe { /* contact me button */
+  position: absolute;
+  color: var(--mainTextColor);
+  background-color: var(--buttonColor);
+  --);
+  border: none;
+  border-radius: 50px;
+  transition: transform ease-in-out .4s;
+  top: 55%;
+}
+.contactMe:hover {
+  transform: scale(1.05);
+  color: var(--mainTextColor);
+}
+.homePageImg {
+  position: absolute;
+  right: 0;
+  padding-right: 80px;
+  top: 45%;
+  transform: translateY(-55%); 
+  z-index: -2
+}
+/* work section */
+.work {
+  height: 100vh;
+}
+.work h1 {
+  font-size: 3em;
+}
+.work a {
+  text-decoration: none;
+  transition: .2s;
+}
+.scroll-button {
+  font-size: 1.5rem;
+  padding-left: 50px;
+  position: relative;
+  color: var(--secTextColor);
+}
+.scroll-button:hover {
+  color: var(--mainTextColor);
+}
+.scroll-button:before {
+  content: "\27F6";
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+
+  transition: .3s transform;
+}
+.scroll-button:hover:before {
+  transform: rotate(90deg);
+}
+.workText {
+  padding-right: 10%;
+}
+/* contact section */
+.contact {
+  height: 100vh;
+}
+.formDiv {
+  margin: 0 auto;
+}
+.contactForm {
+  background-color: rgba(var(--accentColorrgba), 0.05);
+  border: 1px solid var(--borderColor);
+  border-radius: 10px;
+}
+.form-control {
+  background-color: transparent;
+  color: var(--mainTextColor);
+  border: 1px solid var(--borderColor)
+}
+.form-control:focus {
+  border-color: var(--mainTextColor);
+  box-shadow: 0 1px 1px var(--mainTextColor) inset, 0 0 3px var(--mainTextColor); 
+  background-color: transparent;
+  caret-color: var(--mainTextColor);
+  color: white;
+}
+.btn, .btn:focus {
+  background-color: var(--buttonColor);
+  border: none;
+  border-radius: 50px;
+  transition: transform ease-in-out .4s;
+}
+.btn:focus, .btn:focus:active {
+  /*box-shadow: none;*/
+  box-shadow: 0 0 3px var(--mainTextColor);
+  border: 2px solid var(--mainTextColor);
+}
+.btn:hover {
+  background-color: var(--buttonColor);
+  transform: scale(1.05);
+  color: var(--mainTextColor);
+}
+/* moves content of section below navbar when navbar link clicked */
+:target::before {
+  content: "";
+  display: block;
+  min-height: 8vh; 
+  margin: -8vh 0 0; 
+}
+
+@media (max-width: 768px) {
+  .formDiv {
+    width: 75% !important;
+  }
+}
+
+@media (max-width: 479px) {
+  .nameDesc h1 {
+    font-size: 2.8em;
+  }
+  .nameDesc h4 {
+    font-size: 1.2em;
+  }
+  .work h1 {
+    font-size: 2.1em;
+  }
+}
+
+/* name section vertical height adjustments */
+@media screen and (max-height: 550px) {
+  .nameDesc h1, .nameDesc h4 {
+    top: 55%;
+  }
+  .contactMe {
+    top: 70%;
+  }
+}

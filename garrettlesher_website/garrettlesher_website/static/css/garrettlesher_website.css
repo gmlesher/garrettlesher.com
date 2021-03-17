@@ -1,0 +1,156 @@
+/* Global Styles */
+:root {
+  /* Theme colors */
+  --backgroundColor: rgb(21, 32, 43); 
+  --mainTextColor: rgb(255, 255, 255);
+  --secTextColor: rgb(23, 162, 184);
+  --accentColor: rgb(23, 162, 184);
+  --borderColor: rgb(23, 162, 184);
+  --buttonColor: rgb(23, 162, 184);
+  --hamburgerColor: rgb(255, 255, 255);
+  --fontFamily: 'Monda', sans-serif;
+
+  /* color rgb values to be used with rgba with opacity */
+  --backgroundColorrgba: 21, 32, 43;
+  --mainTextColorrgba: 23, 162, 184;
+  --secTextColorrgba: 255, 255, 255;
+  --accentColorrgba: 23, 162, 184;
+  --borderColorrbga: 23, 162, 184;
+  --buttonColorrbga: 23, 162, 184;
+  --hamburgerColorrgba: 255, 255, 255;
+
+}
+body {
+  background-color: var(--backgroundColor);
+  color: var(--mainTextColor);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Monda', sans-serif;
+}
+/* animation stopper on window resize */
+.resize-animation-stopper * {
+  animation: none !important;
+  transition: none !important;
+}
+nav {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  height: 8vh;
+  background-color: var(--backgroundColor);
+  /*background-color: transparent;*/
+  border-bottom: solid 1px var(--borderColor);
+  z-index: 2;
+}
+.logo {
+  padding-top: 25px;
+}
+.nav-links {
+  padding-top: 25px;
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+  font-weight: 700;
+}
+.nav-links li {
+  list-style: none;
+  position: relative;
+}
+.nav-links a {
+  color: var(--mainTextColor);
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+.nav-links a:hover {
+  color: var(--mainTextColor);
+}
+.nav-links a::before {
+  content: "";
+  display: block;
+  height: 5px;
+  width: 100%;
+  border-radius: 10px;
+  background-color: var(--accentColor);
+  position: absolute;
+  top: -5px;
+  width: 0%;
+  transition: all ease-in-out 250ms;
+}
+.nav-links a:hover::before {
+  width: 100%;
+}
+.burger {
+  display: none;
+  cursor: pointer;
+}
+.burger div {
+  width: 30px;
+  height: 3px;
+  background-color: var(--hamburgerColor);
+  margin: 6px;
+  transition: all 0.3s ease
+}
+
+@media screen and (max-width: 1024px) {
+  .nav-links {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  body {
+    overflow-x: hidden;
+  }
+  .nav-links a::before {
+    background-color: var(--backgroundColor);
+  }
+  .nav-links {
+    background-color: rgba(var(--accentColorrgba), 0.75);
+    border-radius: 75px;
+    position: absolute;
+    right: 0px;
+    height: 92vh;
+    top: 8vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out, opacity .75s;
+  }
+  .nav-links li {
+    opacity: 0;
+  }
+  .burger {
+    display: block;
+  }
+}
+.nav-active {
+  opacity: 1;
+  transform: translateX(0%);
+}
+@keyframes navLinkFade {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+.toggle .line-1 {
+  transform: rotate(-45deg) translate(-6px, 6px);
+}
+.toggle .line-2 {
+  opacity: 0;
+}
+.toggle .line-3 {
+  transform: rotate(45deg) translate(-6px, -6px);
+}
