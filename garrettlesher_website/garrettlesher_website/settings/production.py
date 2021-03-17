@@ -1,11 +1,10 @@
+from __future__ import absolute_import, unicode_literals
 from .base import *
 import dj_database_url
-from __future__ import absolute_import, unicode_literals
 import os
 import django_heorku
 
-env = os.environ.copy()
-SECRET_KEY = env['SECRET_KEY']
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 DEBUG = False
 
