@@ -24,3 +24,31 @@ const navSlide = () => {
 }
 
 navSlide();
+
+// on resize window, stop animations
+let resizeTimer;
+window.addEventListener("resize", () => {
+  document.body.classList.add("resize-animation-stopper");
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    document.body.classList.remove("resize-animation-stopper");
+  }, 400);
+});
+
+// validation for contact form before submission. Loading animation for 
+// contact form here too
+$(document).ready(function(){
+    $('.needs-validation').on('submit', function(e) {
+      if (!this.checkValidity()) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      $(this).addClass('was-validated');
+    });
+
+});
+
+// makes all text area fields 3 rows tall
+$('form').ready(function() {
+  $('textarea').attr({'rows': "3"})
+});

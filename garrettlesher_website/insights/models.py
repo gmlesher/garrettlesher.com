@@ -19,11 +19,19 @@ from wagtail.snippets.models import register_snippet
 class InsightsIndexPage(Page):
     intro = RichTextField(blank=True)
 
-    def get_context(self, request):
+    def get_context(self, request, *args, **kwargs):
         # Update context to include only published posts, ordered by reverse-chron
-        context = super().get_context(request)
-        blogpages = self.get_children().live().order_by('-first_published_at')
+        context = super().get_context(request, *args, **kwargs)
+        blogpages = self.get_children().live().public().order_by('-first_published_at')
         context['blogpages'] = blogpages
+        context['categories'] = InsightsCategory.objects.all().order_by('name')
+
+        # Use something like this with ajax for filtering by category
+        category_slug = request.GET.get('categories', None)
+        if category_slug:
+            categories = request.GET.get('categories')
+            blogpages = blogpages.filter(categories__slug__in=[categories])
+
         return context
 
     content_panels = Page.content_panels + [
@@ -99,6 +107,7 @@ class InsightsTagIndexPage(Page):
 
         # Update template context
         context = super().get_context(request)
+        context['insights_index'] = InsightsIndexPage.objects.first()
         context['blogpages'] = blogpages
         return context
     
@@ -106,13 +115,22 @@ class InsightsTagIndexPage(Page):
 @register_snippet
 class InsightsCategory(models.Model):
     name = models.CharField(max_length=255)
+    slug = models.SlugField(
+        verbose_name = "slug",
+        allow_unicode = True,
+        max_length = 255,
+        help_text = "A slug to identify posts by this category",
+        default = "hello",
+    )
     icon = models.ForeignKey(
         'wagtailimages.Image', null=True, blank=True,
         on_delete=models.SET_NULL, related_name='+'
     )
 
+
     panels = [
         FieldPanel('name'),
+        FieldPanel('slug'),
         ImageChooserPanel('icon'),
     ]
 
@@ -120,4 +138,6 @@ class InsightsCategory(models.Model):
         return self.name
 
     class Meta:
-        verbose_name_plural = 'blog categories'
+        verbose_name = "Insights Category"
+        verbose_name_plural = 'Insights Categories'
+        ordering = ["name"]

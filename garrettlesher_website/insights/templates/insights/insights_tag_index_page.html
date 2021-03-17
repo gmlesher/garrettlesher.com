@@ -1,24 +1,46 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load static wagtailcore_tags tz%}
+
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/insights.css' %}">
+{% endblock %}
 
 {% block content %}
-
+  <div class="container">
     {% if request.GET.tag|length %}
-        <h4>Showing pages tagged "{{ request.GET.tag }}"</h4>
+      <div class="tagHeading">
+        <h1>Showing pages tagged "{{ request.GET.tag }}"</h1>
+      </div>
+  
     {% endif %}
 
-    {% for blogpage in blogpages %}
+    <div class="row">
+      <div class="col-md-6">
+        {% for blogpage in blogpages %}
+          <div class="post">
+            <h2><a href="{% pageurl blogpage %}">{{ blogpage.title }}</a></h2>
 
-          <p>
-              <strong><a href="{% pageurl blogpage %}">{{ blogpage.title }}</a></strong><br />
-              <small>Revised: {{ blogpage.latest_revision_created_at }}</small><br />
-              {% if blogpage.author %}
-                <p>By {{ blogpage.author.profile }}</p>
-              {% endif %}
-          </p>
+            {% timezone "America/New_York" %}
+              <small>Revised: {{ blogpage.latest_revision_created_at }}</small>
+            {% endtimezone %}
 
-    {% empty %}
-        No pages found with that tag.
-    {% endfor %}
+            {% if blogpage.author %}
+              <p>By {{ blogpage.author.profile }}</p>
+            {% endif %}
+          </div>
+
+        {% empty %}
+            No pages found with that tag.
+        {% endfor %}
+      </div>
+      
+    </div>
+    
+    <div class="return">
+      <a href="{% pageurl insights_index %}"><button class="btn btn-sm" type="button">&laquo; Go to Insights</button></a>
+    </div>
+  </div>
+
+    
 
 {% endblock %}

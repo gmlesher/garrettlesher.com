@@ -1,53 +1,86 @@
 {% extends "base.html" %}
+{% load static custom_template_tags wagtailcore_tags wagtailembeds_tags wagtailimages_tags %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/insights.css' %}">
+{% endblock %}
 
 {% block body_class %}template-insightspage{% endblock %}
 
 {% block content %}
-  <h1>{{ page.title }}</h1>
-  <p class="meta">{{ page.date }}</p>
-  {% with categories=page.categories.all %}
-    {% if categories %}
-      <h3>Posted in:</h3>
-      <ul>
-        {% for category in categories %}
-          <li style="display: inline">
-              {% image category.icon fill-32x32 style="vertical-align: middle" %}
-              {{ category.name }}
-          </li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-    {% endwith %}
-
-  {% for block in page.body %}
-      {% if block.block_type == 'heading' %}
-          <h1>{{ block.value }}</h1>
-      {% else %}
-          <section class="block-{{ block.block_type }}">
-              {% include_block block %}
-          </section>
-      {% endif %}
-  {% endfor %}
-    
-    
-
-  {% for item in page.gallery_images.all %}
-    <div style="float: left; margin: 10px">
-        {% image item.image fill-320x240 %}
-        <p>{{ item.caption }}</p>
+  <div class="container">
+    <div class="headingInfo">
+      <p class="meta">{{ page.date|date:"F j, Y" }}</p>
+      <h1 class="postTitle">{{ page.title }}</h1>
+      <h4 class="postIntro">{{ page.intro }}</h4>
     </div>
-  {% endfor %}
-  {% if page.tags.all.count %}
-    <div class="tags">
-      <h3>Tags</h3>
-      {% for tag in page.tags.all %}
-        <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
-      {% endfor %}
+    <div class="row">
+      <div class="col-md-9">
+        <div class="mainPostImage">
+          {% for item in page.gallery_images.all|slice:":1" %}
+            {% image item.image original %}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-md-3">
+      </div>
     </div>
-  {% endif %}
 
-  <p><a href="{{ page.get_parent.url }}">Return to Insights</a></p>
+    <div class="row">
+      <div class="col-md-9">
+        <div class="bodyContent">
+          {% for block in page.body %}
+            {% if block.block_type == 'heading' %}
+              <h2>{{ block.value }}</h2>
+            {% elif block.block_type == 'embed' %}
+              <section class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" width="640" height="360" src="{{ block.value.url|embedurl }}?rel=0" allowfullscreen></iframe>
+              </section>
+            {% else %}
+              <section class="block-{{ block.block_type }}">
+                {% include_block block %}
+              </section>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="posted">
+          {% with categories=page.categories.all %}
+            {% if categories %}
+              <h5>Posted in:</h5>
+              <ul>
+                {% for category in categories %}
+                  <li>
+                    {% image category.icon fill-32x32 style="vertical-align: middle" %}
+                    {{ category.name }}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          {% endwith %}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-9">
+        {% if page.tags.all.count %}
+          <div class="tags">
+            <h5>Tags</h5>
+            {% for tag in page.tags.all %}
+              <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button class="btn btn-sm" type="button">{{ tag }}</button></a>
+            {% endfor %}
+          </div>
+        {% endif %}
+        <div class="return">
+          <a href="{{ page.get_parent.url }}"><button class="btn btn-sm" type="button">&laquo; Return to Insights</button></a>
+        </div>
+      </div>
+      <div class="col-md-3">
+        
+      </div>
+    </div>
 
+    
+  </div>
 {% endblock %}
