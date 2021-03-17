@@ -1,1 +1,1 @@
-web: gunicorn garrettlesher_website.wsgi --log-file - 
+web: gunicorn --pythonpath garrettlesher_website garrettlesher_website.wsgi --log-file - 
