@@ -1,6 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 from .base import *
 import os
+import django_heroku
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
@@ -27,3 +28,5 @@ try:
     from .local import *
 except ImportError:
     pass
+
+django_heroku.settings(locals())
