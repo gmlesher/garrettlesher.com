@@ -1,5 +1,5 @@
-from .base import *
 from __future__ import absolute_import, unicode_literals
+from .base import *
 import os
 
 # SECURITY WARNING: keep the secret key used in production secret!
