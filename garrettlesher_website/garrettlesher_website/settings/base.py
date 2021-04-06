@@ -175,11 +175,11 @@ AWS_STORAGE_BUCKET_NAME = 'garrett-website-bucket'
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-AWS_LOCATION = 'media'
-DEFAULT_FILE_STORAGE = 'garrettlesher_website.storage_backends.MediaStorage'
+# AWS_S3_OBJECT_PARAMETERS = {
+#     'CacheControl': 'max-age=86400',
+# }
+# AWS_LOCATION = 'media'
+# DEFAULT_FILE_STORAGE = 'garrettlesher_website.storage_backends.MediaStorage'
 
 # Twilio SendGrid
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
