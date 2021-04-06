@@ -113,26 +113,23 @@
   margin-bottom: 100px;
   min-height: 75vh;
   position: relative;
-  background-size: cover;
   border-radius: 20px;
   overflow: hidden;
 }
-
-.aboutMe:after {
-  content: '';
-  width: 100%;
-  height: 100%;
+.backgroundImage > img {
+  object-fit: cover;
+  position: absolute;
+  width:100%;
+  height:100%;
   top:0;
   left:0;
   right:0;
   bottom:0;
-  background: inherit; 
-  position: absolute;
+  background: inherit;
   box-shadow: inset 0 0 0 400px rgba(255,255,255,0.05);
   filter: blur(10px);
 }
 .aboutRow > div {
-  /*border: 2px solid var(--borderColor);*/
   z-index: 1;
 }
 .profileLogo img {
@@ -144,9 +141,6 @@
   margin-top: 5px;
   margin-bottom: 5px;
 }
-/*.skills > div, .interests > div, .links, .skills, .interests, .profile {
-  text-align: left;
-}*/
 .links > div > div > img {
   margin-right: 5px;
   max-width: 25px;
@@ -163,7 +157,6 @@
   display: list-item;
   list-style-type: disc;
   list-style-position: inside;
-  /*text-decoration: underline overline;*/
 }
 .profileContact { /* profile contact button */
   font-size: 1em;
@@ -218,9 +211,7 @@
 .project-row {
   margin: 0;
   padding: 0;
-  /*background: black;*/
   background: linear-gradient(rgba(var(--accentColorrgba), 0.2), var(--backgroundColor));
-  /*background: linear-gradient(var(--gradientGrey), var(--backgroundColor));*/
 }
 .projectColumn:nth-child(odd)  {
   padding-left: 60px;

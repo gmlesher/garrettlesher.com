@@ -20,6 +20,7 @@ from wagtail.core import hooks
 
 class AboutBlock(blocks.StructBlock):
     profile_image = ImageChooserBlock(required=False, label="Profile/Logo Image")
+    background_image = ImageChooserBlock(label="Background Image")
     links = blocks.StructBlock([
         ('websites', blocks.StreamBlock([
             ('website_information', blocks.StructBlock([
