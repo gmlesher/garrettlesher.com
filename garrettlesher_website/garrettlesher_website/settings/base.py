@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'captcha',
     'wagtailcaptcha',
+    'storages',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -168,6 +169,23 @@ WAGTAIL_SITE_NAME = "garrettlesher_website"
 BASE_URL = 'http://example.com'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# aws bucket for media files
+AWS_STORAGE_BUCKET_NAME = 'garrett-website-bucket'
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'media'
+DEFAULT_FILE_STORAGE = 'garrettlesher_website.storage_backends.MediaStorage'
+
+# Twilio SendGrid
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
+SENDGRID_SANDBOX_MODE_IN_DEBUG=False
 
 # Recaptcha settings
 RECAPTCHA_PUBLIC_KEY = str(os.getenv('RECAPTCHA_PUBLIC_KEY'))

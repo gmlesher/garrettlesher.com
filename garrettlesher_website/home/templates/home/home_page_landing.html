@@ -81,6 +81,11 @@
       </div>
 
       <div class="aboutMe col-md-12">
+        <div class="backgroundImage">
+          {% for block in page.about %}
+              {% image block.value.background_image original %}
+          {% endfor %}
+        </div>
         <div class="aboutRow text-center text-md-start row">
           <div class="col-md-4 profile p-4">
             <div class="profileLogo pb-2">
