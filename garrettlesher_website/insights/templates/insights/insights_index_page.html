@@ -23,11 +23,19 @@
         <h3>Categories</h3>
         {% for cat in categories %}
         <div>
-          <a href="?category={{ cat.slug }}">{% image cat.icon fill-32x32 style="vertical-align: middle" %} {{ cat.name }}</a>
+          <a href="?category={{ cat.slug }}">{% image cat.icon fill-200x200 style="vertical-align: middle" %} {{ cat.name }}</a>
         </div>
         {% endfor %}
       </div>
       <div class="col-md-9">
+          {% if category_slug %}
+            <div class="catSlug">
+              <h2 class="slugTitle">{{ category_slug|title }} Articles</h2>
+              <a class="insightsLink" href="{% slugurl 'insights' %}">All Articles</a>
+            </div>
+          {% endif %}
+         
+
         {% for post in blogpages %}
           <div class="post">
             {% with post=post.specific %}

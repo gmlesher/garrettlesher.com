@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'modelcluster',
     'taggit',
     'widget_tweaks',
+    'captcha',
+    'wagtailcaptcha',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -166,3 +168,7 @@ WAGTAIL_SITE_NAME = "garrettlesher_website"
 BASE_URL = 'http://example.com'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Recaptcha settings
+RECAPTCHA_PUBLIC_KEY = str(os.getenv('RECAPTCHA_PUBLIC_KEY'))
+RECAPTCHA_PRIVATE_KEY = str(os.getenv('RECAPTCHA_PRIVATE_KEY'))

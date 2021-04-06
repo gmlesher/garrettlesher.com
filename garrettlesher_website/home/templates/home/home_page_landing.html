@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 {% load static wagtailcore_tags wagtailimages_tags widget_tweaks %}
 
+{% block extra_js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/ScrollTrigger.min.js"></script>
+    <script src="{% static 'js/tilt.js' %}" id="tiltJS"></script>
+    <script src="{% static 'js/home_page.js' %}"></script>
+{% endblock %}
+
 {% block extra_css %}
   <link rel="stylesheet" type="text/css" href="{% static 'css/home_page.css' %}">
 {% endblock %}
@@ -9,53 +16,9 @@
 
 {% block content %}
   <div class="container">
-    <div class="nameDesc">
-      {% for block in page.body %}
-        {% if block.block_type == 'name' %}
-          <h1>{{ block.value }}</h1>
-        {% elif block.block_type == 'description' %}
-          <h4>{{ block.value }}</h4>
-        {% endif %}
-      {% endfor %}
-
-      <a href="#contact" class="btn btn-lg contactMe">Contact Me</a>
-
-    </div>
-
-    <div class="homePageImg">
-      {% for block in page.body %}
-        {% if block.block_type == 'image' %}
-          {% include_block block %}
-        {% endif %}
-      {% endfor %}
-    </div>
-
-    <div class="work" id="work">
-      <div class="row pb-5">
-        <div class="col-md-12">
-          <h1 class="mb-1 mb-md-2">Crafted Solutions.</h1>
-          <a class="scroll-button" href="#projects">Take me to the projects</a>
-        </div>
-      </div>
-      <div class="row pb-2 pb-sm-4 pb-md-7 pb-lg-9 pb-xl-11">
-        <div class="col-md-6">
-          <h2 class="headline mb-4">Clients</h2>
-          <p class="workText">
-            Great ideas aren’t industry specific. I work with clients of all scopes and sectors to create better experiences through design. Whether an adventurous startup or established global presence, the same level of detail and quality is delivered.
-          </p>
-          
-        </div>
-        <div class="col-md-6">
-          <h2 class="headline mb-4">Industries</h2>
-          
-        </div>
-      </div>
-    </div>
-
     <div class="contact" id="contact">
 
-      <div class="w-50 py-5 pt-5 formDiv">
-        <h1 class="mb-3 text-center">{{ page.form_title|richtext }}</h1>
+      <div class="w-50 vh-100 py-5 pt-5 formDiv d-flex justify-content-center align-items-center">
         <div class="row g-3 my-3 text-center contactForm">
           {{ page.thank_you_text|richtext }}
  
@@ -66,6 +29,232 @@
         </div>
       </div>
     </div>
+
+    <div class="row p-2">
+      <div class="nameDesc col-md-6 ml-2">
+        <svg>
+          <symbol id="s-text">
+            <text text-anchor="start" x="0%" y="65%">
+              {% for block in page.body %}
+                {% if block.block_type == 'name' %}
+                  {{ block.value }}
+                {% endif %}
+              {% endfor %}
+          </text>
+          </symbol>
+
+          <g class = "g-ants">
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+          </g>
+        </svg>
+        {% for block in page.body %}
+          {% if block.block_type == 'description' %}
+            <h4>{{ block.value }}</h4>
+          {% endif %}
+        {% endfor %}
+
+        <a href="{% slugurl 'home' %}#contact" class="btn btn-lg contactMe">Contact Me</a>
+      </div>
+
+      <div class="homeRight col-md-6 d-none d-md-block">
+        <svg class="arrow" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     viewBox="0 0 384 384" style="enable-background:new 0 0 384 384;" xml:space="preserve">
+          <g>
+            <g>
+              <path d="M383.999,40.833C383.999,18.312,365.686,0,343.166,0c-10.74,0-21.26,4.354-28.875,11.958L97.624,228.625l7.021-119.313
+                c0.687-11.708-3.531-23.333-11.583-31.875S73.655,64,61.916,64c-22.344,0-41.094,17.458-42.688,39.771L0.03,372.583
+                c-0.229,3.083,0.906,6.104,3.094,8.292c2.01,2,4.719,3.125,7.542,3.125c0.25,0,0.51,0,0.76-0.021l268.813-19.208
+                c22.292-1.583,39.76-20.333,39.76-42.688c0-11.75-4.896-23.083-13.438-31.146c-8.552-8.063-20.229-12.25-31.875-11.583
+                l-119.302,7.021L372.03,69.708C379.634,62.125,383.999,51.604,383.999,40.833z M356.957,54.625l-236.5,236.5
+                c-3.135,3.125-4,7.875-2.188,11.917c1.813,4.021,5.969,6.688,10.354,6.271l147.313-8.667c5.979-0.188,11.646,1.729,15.99,5.813
+                c4.344,4.104,6.74,9.646,6.74,15.625c0,11.208-8.75,20.604-19.938,21.396L22.186,361.813l18.313-256.521
+                c0.802-11.188,10.208-19.958,21.417-19.958c5.979,0,11.521,2.396,15.625,6.75c4.094,4.333,6.156,10.021,5.813,15.979
+                l-8.667,147.313c-0.26,4.417,2.24,8.542,6.281,10.354c3.99,1.771,8.781,0.938,11.906-2.188l236.49-236.5
+                c3.646-3.625,8.677-5.708,13.802-5.708c10.75,0,19.5,8.75,19.5,19.5C362.666,45.979,360.582,51,356.957,54.625z"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <div class="aboutMe col-md-12">
+        <div class="aboutRow text-center text-md-start row">
+          <div class="col-md-4 profile p-4">
+            <div class="profileLogo pb-2">
+              {% for block in page.about %}
+                  {% image block.value.profile_image original %}
+              {% endfor %}
+            </div>
+            <div class="links">
+              {% for block in page.about %}
+
+                {% if block.value.links.websites %}
+                  <div class="websiteLinks p-2">
+                    <h5>My Websites</h5>
+                    {% for x in block.value.links.websites %}
+                      <div>
+                        {% image x.value.website_icon original %}
+                        <a href="{{ x.value.website_link }}" target="_blank">{{ x.value.website_name }}</a>
+                      </div>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+
+                {% if block.value.links.social_media %}
+                  <div class="socialMediaLinks p-2">
+                    <h5>Social Media</h5>
+                    {% for x in block.value.links.social_media %}
+                      <div>
+                        {% image x.value.social_media_icon original %}
+                        <a href="{{ x.value.social_media_link }}" target="_blank">{{ x.value.social_media_name }}</a>
+                      </div>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+
+                {% if block.value.links.other %}
+                  <div class="otherLinks p-2">
+                    <h5>Other Links</h5>
+                    {% for x in block.value.links.other %}
+                      <div>
+                        {% image x.value.other_icon original %}
+                        <a href="{{ x.value.other_link }}" target="_blank">{{ x.value.other_name }}</a>
+                      </div>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+
+              {% endfor %}
+            </div>
+            <div class="skills p-2">
+              {% for block in page.about %}
+
+                {% if block.value.skills %}
+                  <h5>Skills</h5>
+                  {{ block.value.skills }}
+                {% endif %}
+                  
+              {% endfor %}
+            </div>
+            <div class="interests p-2">
+              {% for block in page.about %}
+
+                {% if block.value.interests %}
+                  <h5>Interests</h5>
+                  {{ block.value.interests }}
+                {% endif %}
+                  
+              {% endfor %}
+            </div>
+          </div>
+          <div class="col-md-4 who p-4">
+            <div class="bio">
+              {% for block in page.about %}
+
+                {% if block.value.who_i_am %}
+                  <h2>Who I Am</h2>
+                  <p>{{ block.value.who_i_am }}</p>
+                {% endif %}
+                  
+              {% endfor %}
+            </div>
+          </div>
+          <div class="col-md-4 what p-4">
+            <div class="do">
+              {% for block in page.about %}
+
+                {% if block.value.what_i_do %}
+                  <h2>What I Do</h2>
+                  <p>{{ block.value.what_i_do }}</p>
+                {% endif %}
+                  
+              {% endfor %}
+            </div>
+            <div class="contactLink text-center p-4">
+              <a href="{% slugurl 'home' %}#contact" class="btn btn-lg profileContact">Contact Me</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
+
+    <div class="work" id="work">
+      <div class="workIntro">
+        <div class="row pb-5">
+          <div class="col-md-12">
+            {% for block in page.work_content %}
+              {% if block.block_type == 'work_heading' %}
+                <h1 class="mb-1 mb-md-2">{{ block.value.section_title }}</h1>
+              {% endif %}
+            {% endfor %}
+            <a class="scroll-button" href="{% slugurl 'home' %}#projects">Show me the projects</a>
+          </div>
+        </div>
+
+        <div class="row pb-2 pb-sm-4 pb-md-7 pb-lg-9 pb-xl-11">
+          <div class="col-md-6">
+            {% for block in page.work_content %}
+              {% if block.block_type == 'work_heading' %}
+                <h2 class="headline mb-4">{{ block.value.subheading }}</h2>
+                <p class="workText">
+                  {{ block.value.paragraph }}
+                </p>
+            {% endif %}
+            {% endfor %}
+            
+          </div>
+          <div class="col-md-6">
+            {% for block in page.work_content %}
+              {% if block.block_type == 'work_heading' %}
+                <h2 class="headline mb-4">{{ block.value.subheading_2 }}</h2>
+                <p class="workText">
+                  {{ block.value.paragraph_2 }}
+                </p>
+            {% endif %}
+            {% endfor %}
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="projects-container" id="projects">
+        <div class="row pb-5 project-row d-flex flex-wrap justify-content-between" >
+          {% for block in page.work_content %}
+            {% if block.block_type == 'work' %}
+              <div class="projectColumn col-md-6 d-flex flex-wrap justify-content-center">
+                <div class="project" id="project_{{ forloop.counter0 }}">
+                  <a class="" href="{{ block.value.url }}" id="link_{{ forloop.counter0 }}" target="_blank">
+                    <div class="projectHeader">
+                      <h4 class="workTitle mb-2">{{ block.value.title }}</h4>
+                      <small class="workCat">{{ block.value.category }}</small>
+                    </div>
+                    <div class="projectImage">
+                      {% image block.value.image original %}
+                      <div class="imageMask d-flex justify-content-center align-items-center" id="mask_{{ forloop.counter0 }}">
+                        <p>See Live Project</p>
+                      </div>
+                    </div>
+                  </a>
+                  <div class="projectDescription">
+                    <p>{{ block.value.description }}</p>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
 {% endblock %}
+
+
+
+
+

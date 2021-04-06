@@ -1,55 +1,189 @@
-/* landing page name section */
-.nameDesc {
+/* landing page */
+.nameDesc, .homeRight {
+  position: relative;
   top: 0;
   height: 100vh;
   line-height: 100px;
-  z-index: -1;
-  /*background-color: blue;*/
+  /*z-index: -1;*/
 }
-.nameDesc h1 { /* my name */
+/* name svg animation */
+.nameDesc svg {
   position: absolute;
+  padding-left: 5%;
+  padding-right: 5%;
   margin-left: -5px;
   top: 45%;
-  transform: translateY(-60%);
+  left: 0%;
+  transform: translate(0%, -55%);
+  display: flex;
+  font: 5em 'Monda';
+  width: 100%;
+  height: auto;
+}
+.text-copy {
+    fill: none;
+    stroke: white;
+    stroke-dasharray: 15% 20%;
+    stroke-width: 2px;
+    stroke-dashoffset: 0%;
+    animation: stroke-offset 11.5s infinite linear;
+}
+.text-copy:nth-child(1){
+  stroke: var(--mainTextColor);
+  animation-delay: -1;
+}
+.text-copy:nth-child(2){
+  stroke: rgb(202,129,112);
+  animation-delay: -2s;
+}
+.text-copy:nth-child(3){
+  stroke: rgb(103,151,207);
+  animation-delay: -3s;
+}
+.text-copy:nth-child(4){
+  stroke: rgb(168,146,88);
+  animation-delay: -4s;
+}
+.text-copy:nth-child(5){
+  stroke: var(--secTextColor);
+  animation-delay: -5s;
+}
+
+@keyframes stroke-offset {
+  100% {stroke-dashoffset: -35%;}
+}
+/*.nameDesc h1 { 
+  position: absolute;
+  margin-left: -5px;
+  top: 50%;
+  left: -50px;
+  transform: translate(-50%);
   font-weight: bold;
   font-size: 4em;
   background-color: var(--secTextColor);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
+}*/
 .nameDesc h4 { /* my title */
   position: absolute;
-  padding-top: 120px;
-  top: 45%;
-  transform: translateY(-60%);
+  padding-left: 5%;
+  padding-right: 5%;
+  top: 51%;
+  left: 0%;
+  transform: translate(0%, -49%);
   font-size: 1.5em;
   color: var(--mainTextColor);
 }
 .contactMe { /* contact me button */
   position: absolute;
+  margin-left: 5%;
+  margin-right: 5%;
   color: var(--mainTextColor);
   background-color: var(--buttonColor);
   --);
   border: none;
   border-radius: 50px;
   transition: transform ease-in-out .4s;
-  top: 55%;
+  top: 58%;
+  left: 0;
+  transform: translateY(0, 42%);
 }
 .contactMe:hover {
   transform: scale(1.05);
   color: var(--mainTextColor);
 }
-.homePageImg {
+.homeRight > svg {
   position: absolute;
-  right: 0;
-  padding-right: 80px;
-  top: 45%;
-  transform: translateY(-55%); 
-  z-index: -2
+  padding-left: 5%;
+  padding-right: 5%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /*display: block;
+  margin-left: auto;
+  margin-right: auto;*/
+  width: auto;
+  /*height: auto;*/
+  fill: var(--accentColor);
+  /*opacity: 0.5;*/
+}
+/* about me section */
+.aboutMe {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  min-height: 75vh;
+  position: relative;
+  background: url("background.png") no-repeat center;
+  background-size: cover;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.aboutMe:after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background: inherit; 
+  position: absolute;
+  box-shadow: inset 0 0 0 400px rgba(255,255,255,0.05);
+  filter: blur(10px);
+}
+.aboutRow > div {
+  /*border: 2px solid var(--borderColor);*/
+  z-index: 1;
+}
+.profileLogo img {
+  max-width: 100px;
+  max-height: 100px;
+  border-radius: 50%;
+}
+.links > div > div {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+/*.skills > div, .interests > div, .links, .skills, .interests, .profile {
+  text-align: left;
+}*/
+.links > div > div > img {
+  margin-right: 5px;
+  max-width: 25px;
+  max-height: 25px;
+}
+.links a {
+  text-decoration: none;
+  color: var(--secTextColor);
+}
+.links a:hover {
+  color: var(--mainTextColor);
+}
+.block-skills, .block-interests {
+  display: list-item;
+  list-style-type: disc;
+  list-style-position: inside;
+  /*text-decoration: underline overline;*/
+}
+.profileContact { /* profile contact button */
+  font-size: 1em;
+  color: var(--mainTextColor);
+}
+.profileContact:hover {
+  transform: scale(1.05);
+  color: var(--mainTextColor);
 }
 /* work section */
 .work {
-  height: 100vh;
+  min-height: 100vh;
+}
+.workIntro {
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 15vh;
+  padding-bottom: 22vh;
+  margin-bottom: 100px;
+  min-height: 100vh;
 }
 .work h1 {
   font-size: 3em;
@@ -72,7 +206,6 @@
   font-weight: bold;
   position: absolute;
   left: 0;
-
   transition: .3s transform;
 }
 .scroll-button:hover:before {
@@ -80,6 +213,90 @@
 }
 .workText {
   padding-right: 10%;
+}
+/* work > #projects section */
+.project-row {
+  margin: 0;
+  padding: 0;
+  /*background: black;*/
+  background: linear-gradient(rgba(var(--accentColorrgba), 0.2), var(--backgroundColor));
+  /*background: linear-gradient(var(--gradientGrey), var(--backgroundColor));*/
+}
+.projectColumn:nth-child(odd)  {
+  padding-left: 60px;
+  padding-bottom: 25px;
+}
+.projectColumn:nth-child(even)  {
+  padding-right: 60px;
+  padding-bottom: 25px;
+}
+.projectColumn:nth-child(odd) > div {
+  margin-top: -75px;
+}
+.projectColumn:nth-child(even) > div {
+  margin-top: 75px;
+}
+.project {
+  transform-style: preserve-3d;
+  position:relative;
+  width: 80%;
+  height: 900px;
+  background-color: rgba(var(--accentColorrgba), 0.2);
+  border-radius: 20px;
+  box-shadow: 5px 5px 10px 2px rgba(var(--accentColorrgba), 0.1);
+}
+.project:hover > a > div.projectHeader, .project:hover > div.projectDescription {
+  transform: translateZ(50px);
+  transition: all .4s ease;
+}
+.project a {
+  color: var(--mainTextColor);
+}
+.projectImage {
+  position: relative;
+  z-index: -1;
+}
+.projectImage img {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  width: 100%;
+  height: auto;
+}
+.imageMask {
+  transform-style: preserve-3d;
+  font-size: 2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  width: 100%;
+  height: 100%;
+  background-color: var(--backgroundColor);
+  z-index: 1;
+  opacity: 0;
+  transition: all .4s ease;
+}
+.projectHeader {
+  left: 20px;
+  top: 20px;
+  position: absolute;
+}
+.workTitle {
+  font-weight: 700;
+}
+.workCat {
+  color: rgba(var(--mainTextColorrgba), 0.7);
+}
+.projectDescription {
+  padding: 20px;
+  position: absolute;
+}
+.projectDescription p > a {
+  color: var(--secTextColor);
+}
+.js-tilt-glare {
+  border-radius: 20px;
 }
 /* contact section */
 .contact {
@@ -122,28 +339,109 @@
   color: var(--mainTextColor);
 }
 /* moves content of section below navbar when navbar link clicked */
-:target::before {
+#projects:target::before {
+  content: "";
+  display: block;
+  min-height: 20vh; 
+  margin: -8vh 0 0; 
+}
+#work:target::before {
+  content: "";
+  display: block;
+  min-height: 8vh; 
+  margin: -8vh 0 0; 
+}
+#contact:target::before {
   content: "";
   display: block;
   min-height: 8vh; 
   margin: -8vh 0 0; 
 }
 
+@media (max-width: 1399px) {
+  .nameDesc svg {
+    font: 4em 'Monda';
+  }
+  .nameDesc h4 {
+    font-size: 1.4em;
+  }
+}
+
+@media (max-width: 1200px) {
+  .nameDesc svg {
+    font: 3.8em 'Monda';
+  }
+  .homeRightText {
+    font-size: 2.5em;
+  }
+}
+@media (max-width: 991px) {
+  .nameDesc svg {
+    font: 2.8em 'Monda';
+  }
+  .homeRightText {
+    font-size: 1.5em;
+  }
+}
+
 @media (max-width: 768px) {
+  .nameDesc svg {
+    font: 3.7em 'Monda';
+  }
   .formDiv {
     width: 75% !important;
+  }
+  .project:hover > a > div.projectHeader, .project:hover > div.projectDescription {
+    transform: none;
+    transition: none;
+  }
+  .project {
+    transform: none !important;
+  }
+  .projectColumn:nth-child(odd) > div {
+    margin: 0;
+    padding: 0;
+  }
+  .projectColumn:nth-child(even) > div {
+    margin: 0;
+    padding: 0;
+  }
+  .projectColumn:nth-child(odd)  {
+    padding:0;
+
+  }
+  .projectColumn:nth-child(even)  {
+    padding: 0;
+
+  }
+  .projectColumn {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  #projects:target::before {
+    content: "";
+    display: block;
+    min-height: 8vh; 
+    margin: -8vh 0 0; 
   }
 }
 
 @media (max-width: 479px) {
-  .nameDesc h1 {
-    font-size: 2.8em;
+  .nameDesc svg {
+    font: 2.2em 'Monda';
   }
   .nameDesc h4 {
-    font-size: 1.2em;
+    font-size: 1.1em;
   }
   .work h1 {
     font-size: 2.1em;
+  }
+  .g-recaptcha > div {
+    transform: scale(0.70);
+    transform-origin: 0 0;
+  }
+  .projectColumn:nth-child(even) > div {
+    margin-top: 0;
   }
 }
 

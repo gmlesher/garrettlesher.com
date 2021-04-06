@@ -14,6 +14,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
 
 class InsightsIndexPage(Page):
@@ -22,15 +23,17 @@ class InsightsIndexPage(Page):
     def get_context(self, request, *args, **kwargs):
         # Update context to include only published posts, ordered by reverse-chron
         context = super().get_context(request, *args, **kwargs)
-        blogpages = self.get_children().live().public().order_by('-first_published_at')
-        context['blogpages'] = blogpages
-        context['categories'] = InsightsCategory.objects.all().order_by('name')
-
-        # Use something like this with ajax for filtering by category
-        category_slug = request.GET.get('categories', None)
+        blogpages = InsightsPage.objects.live().public().order_by('-first_published_at')
+        category_slug = request.GET.get('category', None)
         if category_slug:
-            categories = request.GET.get('categories')
-            blogpages = blogpages.filter(categories__slug__in=[categories])
+            if blogpages.filter(categories__slug=category_slug).count() > 0:
+                context['blogpages'] = blogpages.filter(categories__slug=category_slug)
+        else:
+            context['blogpages'] = blogpages
+
+        context['category_slug'] = category_slug
+        context['authors'] = InsightsAuthor.objects.all()
+        context['categories'] = InsightsCategory.objects.all().order_by('name')
 
         return context
 
@@ -59,6 +62,7 @@ class InsightsPage(Page):
     ])
     tags = ClusterTaggableManager(through=InsightsPageTag, blank=True)
     categories = ParentalManyToManyField('insights.InsightsCategory', blank=True)
+    authors = ParentalManyToManyField('insights.InsightsAuthor', blank=True)
 
     def main_image(self):
         gallery_item = self.gallery_images.first()
@@ -78,6 +82,9 @@ class InsightsPage(Page):
             FieldPanel('tags'),
             FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
         ], heading="Blog information"),
+        MultiFieldPanel([
+            InlinePanel('insights_authors', label="Author", min_num=1, max_num=4)
+            ], heading="Authors"),
         FieldPanel('intro'),
         StreamFieldPanel('body'),
         InlinePanel('gallery_images', label="Gallery images"),
@@ -94,6 +101,20 @@ class InsightsPageGalleryImage(Orderable):
     panels = [
         ImageChooserPanel('image'),
         FieldPanel('caption'),
+    ]
+
+class InsightsAuthorsOrderable(Orderable):
+    """allows selection of one or more authors for insights post"""
+
+    page = ParentalKey(InsightsPage, on_delete=models.CASCADE, related_name='insights_authors')
+    author = models.ForeignKey(
+        "insights.InsightsAuthor", 
+        on_delete=models.CASCADE,
+        related_name='+',
+        )
+
+    panels = [
+        SnippetChooserPanel("author"),
     ]
 
 
@@ -114,13 +135,13 @@ class InsightsTagIndexPage(Page):
 
 @register_snippet
 class InsightsCategory(models.Model):
+    """Insights category snippets"""
     name = models.CharField(max_length=255)
     slug = models.SlugField(
         verbose_name = "slug",
         allow_unicode = True,
         max_length = 255,
         help_text = "A slug to identify posts by this category",
-        default = "hello",
     )
     icon = models.ForeignKey(
         'wagtailimages.Image', null=True, blank=True,
@@ -141,3 +162,53 @@ class InsightsCategory(models.Model):
         verbose_name = "Insights Category"
         verbose_name_plural = 'Insights Categories'
         ordering = ["name"]
+
+# StructBlocks
+class WebsiteBlock(blocks.StructBlock):
+    website_name = blocks.CharBlock()
+    website_link = blocks.URLBlock()
+
+
+class SocialMediaBlock(blocks.StructBlock):
+    social_media_name = blocks.CharBlock()
+    social_media_link = blocks.URLBlock()
+
+
+@register_snippet
+class InsightsAuthor(models.Model):
+    """Insights author snippets"""
+    name = models.CharField(max_length=100)
+    website = StreamField([
+        ('website_block', WebsiteBlock(max_num=1)),
+        ], blank=True, null=True)
+    social_media = StreamField([
+        ('social_media_block', SocialMediaBlock()),
+        ], blank=True, null=True, verbose_name="Social Media & Other") 
+    image = models.ForeignKey(
+        "wagtailimages.Image",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True, 
+        related_name="+",
+        )
+
+    panels = [
+        MultiFieldPanel([
+            FieldPanel("name"),
+            ImageChooserPanel("image"),
+
+            ], heading="Name and Image"),
+        MultiFieldPanel([
+            StreamFieldPanel("website"),
+            StreamFieldPanel("social_media"),
+            ], heading="Links"),
+    ]
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Insights Author"
+        verbose_name_plural = 'Insights Authors'
+        ordering = ["name"]
+

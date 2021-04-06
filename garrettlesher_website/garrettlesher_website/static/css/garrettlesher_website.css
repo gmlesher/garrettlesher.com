@@ -8,12 +8,13 @@
   --borderColor: rgb(23, 162, 184);
   --buttonColor: rgb(23, 162, 184);
   --hamburgerColor: rgb(255, 255, 255);
+  --gradientGrey: rgb(68, 77, 85);
   --fontFamily: 'Monda', sans-serif;
 
   /* color rgb values to be used with rgba with opacity */
   --backgroundColorrgba: 21, 32, 43;
-  --mainTextColorrgba: 23, 162, 184;
-  --secTextColorrgba: 255, 255, 255;
+  --mainTextColorrgba: 255, 255, 255;
+  --secTextColorrgba: 23, 162, 184;
   --accentColorrgba: 23, 162, 184;
   --borderColorrbga: 23, 162, 184;
   --buttonColorrbga: 23, 162, 184;
@@ -131,6 +132,12 @@ nav {
     display: block;
   }
 }
+
+@media (max-width: 479px) {
+  .nav-links {
+    justify-content: space-evenly;
+  }
+}
 .nav-active {
   opacity: 1;
   transform: translateX(0%);
@@ -145,6 +152,7 @@ nav {
     transform: translateX(0px);
   }
 }
+
 .toggle .line-1 {
   transform: rotate(-45deg) translate(-6px, 6px);
 }
@@ -154,4 +162,4 @@ nav {
 .toggle .line-3 {
   transform: rotate(45deg) translate(-6px, -6px);
 }
-/* delete this comment later */
+

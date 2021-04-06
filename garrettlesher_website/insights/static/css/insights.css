@@ -32,7 +32,32 @@
   color: var(--secTextColor);
 }
 .categories img {
+  max-height: 32px;
+  max-width: 32px;
   margin-right: 10px;
+}
+.catSlug {
+  padding-bottom: 20px;
+  border-bottom: solid 2px var(--mainTextColor);
+}
+.insightsLink {
+  font-size: 1.2rem;
+  padding-left: 50px;
+  position: relative;
+  color: var(--secTextColor);
+}
+.insightsLink:hover {
+  color: var(--mainTextColor);
+}
+.insightsLink:before {
+  content: "\27F5";
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  transition: .3s transform;
+}
+.insightsLink:hover:before {
+  transform: translateX(-10px);
 }
 .header_photo {
   object-fit: cover;
@@ -64,13 +89,21 @@ h2 > a:hover {
   top: 8vh;
   margin-bottom: 20vh;
 }
+.postAuthor li {
+  list-style: none;
+  margin-bottom: 10px;
+}
+.postAuthor img {
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 50%;
+}
+.nameAndLinks {
+  padding-left: 10px; 
+}
 .postTitle {
   color: var(--secTextColor);
   margin-left: -3px;
-}
-.meta {
-  margin: 0;
-  font-size: .8em;
 }
 .mainPostImage img {
   max-width: 100%;
@@ -89,7 +122,15 @@ h2 > a:hover {
   padding-left: 0;
 }
 .posted img {
+  max-height: 32px;
+  max-width: 32px;
   margin-right: 10px;
+}
+.posted a {
+  color: var(--mainTextColor);
+}
+.posted a:hover {
+  color: var(--secTextColor);
 }
 .embed-responsive {
   position: relative;
@@ -148,12 +189,40 @@ a:hover {
   text-decoration: none;
   color: var(--mainTextColor);;
 }
-.tags button, .return button {
+.tags button {
+  border-radius: 50px;
   background-color: var(--buttonColor);
   border: none;
   color: var(--mainTextColor);
-  margin: 10px 0;
+  margin: 10px 5px 0 0;
+  transition: transform ease-in-out .4s;
 }
+.tags button:hover {
+  transform: scale(1.05);
+  color: var(--mainTextColor);
+}
+
+.return > a {
+  font-size: 1.2rem;
+  padding-left: 50px;
+  position: relative;
+  color: var(--secTextColor);
+}
+.return > a:hover {
+  color: var(--mainTextColor);
+}
+.return > a:before {
+  content: "\27F5";
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  transition: .3s transform;
+}
+.return > a:hover:before {
+  transform: translateX(-10px);
+}
+
+
 .tags, .return {
   margin-block-start: 2em;
   margin-block-end: 2em;

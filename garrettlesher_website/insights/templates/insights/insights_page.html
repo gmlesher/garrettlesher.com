@@ -10,7 +10,39 @@
 {% block content %}
   <div class="container">
     <div class="headingInfo">
-      <p class="meta">{{ page.date|date:"F j, Y" }}</p>
+      <h6 class="postAuthor pb-4">
+        {% for author in self.insights_authors.all %}
+          {% image author.author.image fill-500x500 as img %}
+          <li>
+            {% if author.author.image %}
+              <img class="authorImage" src="{{ img.url }}" alt="{{ author.author.name }}">
+            {% else %}
+              Author: 
+            {% endif %}
+            <small class="nameAndLinks">
+              {{ author.author.name }}
+              <!-- if author has website links filled out, add information -->
+              {% if author.author.website %}
+                {% for website in author.author.website %}
+                  -
+                  <a href="{{ website.value.website_link }}" target="_blank">{{ website.value.website_name }}</a>
+                {% endfor %}
+              {% endif %}
+              <!-- if author has social media links filled out, add information -->
+              {% if author.author.social_media %}
+                {% for social_media_link in author.author.social_media %}
+                  -
+                  <a href="{{ social_media_link.value.social_media_link }}" target="_blank">{{ social_media_link.value.social_media_name }}</a>
+                {% endfor %} 
+                
+              {% endif %}
+              - 
+              {{ page.date|date:"F j, Y" }}
+            </small>
+          </li>
+        {% endfor %}
+      </h6>
+      
       <h1 class="postTitle">{{ page.title }}</h1>
       <h4 class="postIntro">{{ page.intro }}</h4>
     </div>
@@ -52,8 +84,7 @@
               <ul>
                 {% for category in categories %}
                   <li>
-                    {% image category.icon fill-32x32 style="vertical-align: middle" %}
-                    {{ category.name }}
+                    <a href="{{ self.get_parent.url }}?category={{ category.slug }}">{% image category.icon fill-200x200 style="vertical-align: middle" %} {{ category.name }}</a>
                   </li>
                 {% endfor %}
               </ul>
@@ -73,7 +104,7 @@
           </div>
         {% endif %}
         <div class="return">
-          <a href="{{ page.get_parent.url }}"><button class="btn btn-sm" type="button">&laquo; Return to Insights</button></a>
+          <a href="{{ page.get_parent.url }}">All Articles</a>
         </div>
       </div>
       <div class="col-md-3">
