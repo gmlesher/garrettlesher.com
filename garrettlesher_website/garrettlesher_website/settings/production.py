@@ -2,8 +2,6 @@ from __future__ import absolute_import, unicode_literals
 from .base import *
 import dj_database_url
 import os
-from dotenv import load_dotenv
-load_dotenv()
 
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
