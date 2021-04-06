@@ -8,9 +8,9 @@ whitenoise==5.2.0
 wagtail-django-recaptcha==1.0
 django-recaptcha==2.0.6
 python-dotenv==0.15.0
-django-storages-1.11.1
-boto3-1.17.45 
-botocore-1.20.45 
-jmespath-0.10.0 
-python-dateutil-2.8.1 
-s3transfer-0.3.6
+django-storages==1.11.1
+boto3==1.17.45 
+botocore==1.20.45 
+jmespath==0.10.0
+python-dateutil==2.8.1 
+s3transfer==0.3.6
