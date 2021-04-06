@@ -7,3 +7,4 @@ django-heroku==0.3.1
 whitenoise==5.2.0
 wagtail-django-recaptcha==1.0
 django-recaptcha==2.0.6
+python-dotenv==0.15.0
