@@ -134,7 +134,6 @@ class HomePage(WagtailCaptchaEmailForm, Page):
         
         submitted_date_str = date.today().strftime('%x')
         content.append('{}: {}'.format('Submitted', submitted_date_str))
-        content.append('{}: {}'.format('Submitted Via', self.full_url))
         content = '\n'.join(content) + "\n"
         subject = self.subject + " - " + submitted_date_str
         send_mail(subject, content, addresses, self.from_address)
