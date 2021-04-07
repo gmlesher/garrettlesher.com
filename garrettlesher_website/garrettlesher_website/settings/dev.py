@@ -26,16 +26,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 INTERNAL_IPS = ("127.0.0.1", "0.0.0.0", '192.168.1.16')
 
-# aws media files storage
-MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
 try:
     from .local import *
 except ImportError:
     pass
 
-django_heroku.settings(locals())
 
 LOGGING = {
     'version': 1,
@@ -57,3 +52,5 @@ LOGGING = {
         },
     },
 }
+
+django_heroku.settings(locals())
