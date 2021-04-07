@@ -14,3 +14,8 @@ botocore==1.20.45
 jmespath==0.10.0
 python-dateutil==2.8.1 
 s3transfer==0.3.6
+django-sendgrid==v5-0.9.1 
+future==0.18.2 
+python-http-client==3.3.2 
+sendgrid==6.6.0 
+starkbank-ecdsa==1.1.0

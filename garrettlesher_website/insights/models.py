@@ -1,20 +1,35 @@
+""" python imports"""
+
+""" django imports """
 from django import forms
 from django.db import models, migrations
-from modelcluster.fields import ParentalKey, ParentalManyToManyField
-from modelcluster.contrib.taggit import ClusterTaggableManager
-from taggit.models import TaggedItemBase
+
+""" wagtail imports """
+# wagtail embeds
+from wagtail.embeds.blocks import EmbedBlock
+# wagtail snippets
+from wagtail.snippets.models import register_snippet
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
+# wagtail images
+from wagtail.images.blocks import ImageChooserBlock
+from wagtail.images.edit_handlers import ImageChooserPanel
+# wagtail search
+from wagtail.search import index
+#  wagtail admin
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel, StreamFieldPanel
+# wagtail core
+from wagtail.core import blocks
 from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.rich_text import RichText
-from wagtail.core import blocks
 from wagtail.core.blocks import RawHTMLBlock, BlockQuoteBlock 
-from wagtail.embeds.blocks import EmbedBlock
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel, StreamFieldPanel
-from wagtail.images.edit_handlers import ImageChooserPanel
-from wagtail.images.blocks import ImageChooserBlock
-from wagtail.search import index
-from wagtail.snippets.models import register_snippet
-from wagtail.snippets.edit_handlers import SnippetChooserPanel
+
+""" 3rd party app imports"""
+#  model cluster
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
+from modelcluster.contrib.taggit import ClusterTaggableManager
+# taggit
+from taggit.models import TaggedItemBase
 
 
 class InsightsIndexPage(Page):

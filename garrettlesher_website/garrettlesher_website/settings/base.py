@@ -24,10 +24,12 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+    # my apps
     'home',
     'search',
     'insights',
 
+    # wagtail apps
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
     'wagtail.contrib.routable_page',
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     'wagtail.admin',
     'wagtail.core',
 
+    # 3rd party apps
     'modelcluster',
     'taggit',
     'widget_tweaks',
@@ -48,6 +51,7 @@ INSTALLED_APPS = [
     'wagtailcaptcha',
     'storages',
 
+    # django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

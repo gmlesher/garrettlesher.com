@@ -1,22 +1,34 @@
+""" python imports """
+from datetime import date
+
+""" django imports """
 from django.db import models
 from django.http import HttpResponse
 from django.shortcuts import render
-from modelcluster.fields import ParentalKey
-from wagtail.core.models import Page
-from wagtail.core.fields import RichTextField, StreamField
-from wagtail.core import blocks
-from wagtail.images.blocks import ImageChooserBlock
-from wagtail.admin.edit_handlers import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel, StreamFieldPanel
-from wagtail.images.edit_handlers import ImageChooserPanel
 from django.template.response import TemplateResponse
+
+""" wagtail imports """
+# wagtail contrib
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.contrib.forms.edit_handlers import FormSubmissionsPanel
+# wagtail images
+from wagtail.images.blocks import ImageChooserBlock
+from wagtail.images.edit_handlers import ImageChooserPanel
+# wagtail admin
+from wagtail.admin.edit_handlers import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel, StreamFieldPanel
+from wagtail.admin.mail import send_mail
+# wagtail core
+from wagtail.core.models import Page
+from wagtail.core import blocks
+from wagtail.core.fields import RichTextField, StreamField
 
+""" 3rd party app imports """
 from wagtailcaptcha.models import WagtailCaptchaEmailForm
+from modelcluster.fields import ParentalKey
 
 
-from wagtail.core import hooks
+
 
 class AboutBlock(blocks.StructBlock):
     profile_image = ImageChooserBlock(required=False, label="Profile/Logo Image")
@@ -106,6 +118,26 @@ class HomePage(WagtailCaptchaEmailForm, Page):
         ], "Email settings"),
         FormSubmissionsPanel('Contact form submissions'),
     ]
+
+
+    def send_mail(self, form):
+        """Overrides default send_mail function in wagtail. 
+        Added submission date and url to where form was submitted."""
+        addresses = [x.strip() for x in self.to_address.split(',')]
+        content = []
+        for field in form:
+            value = field.value()
+            if isinstance(value, list):
+                value = ', '.join(value)
+            content.append('{}: {}'.format(field.label, value))
+        
+        
+        submitted_date_str = date.today().strftime('%x')
+        content.append('{}: {}'.format('Submitted', submitted_date_str))
+        content.append('{}: {}'.format('Submitted Via', self.full_url))
+        content = '\n'.join(content) + "\n"
+        subject = self.subject + " - " + submitted_date_str
+        send_mail(subject, content, addresses, self.from_address)
 
 
 class FormField(AbstractFormField):
