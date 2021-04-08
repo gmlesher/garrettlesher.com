@@ -84,9 +84,9 @@
   border: none;
   border-radius: 50px;
   transition: transform ease-in-out .4s;
-  top: 58%;
+  top: 54%;
   left: 0;
-  transform: translateY(0, 42%);
+  transform: translateY(0, 46%);
 }
 .contactMe:hover {
   transform: scale(1.05);
@@ -370,12 +370,15 @@
   .nameDesc svg {
     font: 2.8em 'Monda';
   }
+  .nameDesc h4 {
+    font: 1em 'Monda';
+  }
   .homeRightText {
     font-size: 1.5em;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .nameDesc svg {
     font: 3.7em 'Monda';
   }
@@ -422,7 +425,7 @@
     font: 2.2em 'Monda';
   }
   .nameDesc h4 {
-    font-size: 1.1em;
+    font-size: .8em;
   }
   .work h1 {
     font-size: 2.1em;
