@@ -283,8 +283,11 @@
   padding: 20px;
   position: absolute;
 }
-.projectDescription p > a {
+.projectDescription a {
   color: var(--secTextColor);
+}
+.projectDescription a:hover {
+  color: var(--mainTextColor);
 }
 .js-tilt-glare {
   border-radius: 20px;
