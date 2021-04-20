@@ -77,8 +77,10 @@ class WorkBlock(blocks.StructBlock):
 class WorkHeading(blocks.StructBlock):
     section_title = blocks.CharBlock()
     subheading = blocks.CharBlock(required=False)
+    tagline = blocks.CharBlock()
     paragraph = blocks.RichTextBlock(required=False)
     subheading_2 = blocks.CharBlock(required=False)
+    tagline_2 = blocks.CharBlock()
     paragraph_2 = blocks.RichTextBlock(required=False)
 
 

@@ -204,8 +204,21 @@
 .scroll-button:hover:before {
   transform: rotate(90deg);
 }
-.workText {
-  padding-right: 10%;
+.design > div {
+  height: 90%;
+  border: 2px solid var(--borderColor);
+  border-radius: 20px;
+}
+.development > div {
+  height: 90%;
+  border: 2px solid var(--borderColor);
+  border-radius: 20px;
+}
+.service {
+  padding: 10%;
+}
+.headline {
+  color: var(--accentColor)
 }
 /* work > #projects section */
 .project-row {

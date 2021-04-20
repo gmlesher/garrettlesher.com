@@ -188,27 +188,37 @@
           </div>
         </div>
 
-        <div class="row pb-2 pb-sm-4 pb-md-7 pb-lg-9 pb-xl-11">
-          <div class="col-md-6">
-            {% for block in page.work_content %}
-              {% if block.block_type == 'work_heading' %}
-                <h2 class="headline mb-4">{{ block.value.subheading }}</h2>
-                <p class="workText">
-                  {{ block.value.paragraph }}
-                </p>
-            {% endif %}
-            {% endfor %}
+        <div class="colContainer row pb-2 pb-sm-4 pb-md-7 pb-lg-9 pb-xl-11">
+          <div class="design col-md-6 text-center">
+            <div class="service col-md-12 mt-5">
+              {% for block in page.work_content %}
+                {% if block.block_type == 'work_heading' %}
+                  <h2 class="headline mb-4">{{ block.value.subheading }}</h2>
+                  <h4 class="tagline mb-4">{{ block.value.tagline }}</h4>
+                  <p class="workText">
+                    {{ block.value.paragraph }}
+                  </p>
+                  
+                {% endif %}
+              {% endfor %}
+            </div>
+            
             
           </div>
-          <div class="col-md-6">
-            {% for block in page.work_content %}
-              {% if block.block_type == 'work_heading' %}
-                <h2 class="headline mb-4">{{ block.value.subheading_2 }}</h2>
-                <p class="workText">
-                  {{ block.value.paragraph_2 }}
-                </p>
-            {% endif %}
-            {% endfor %}
+          <div class="development col-md-6 text-center">
+            <div class="service col-md-12 mt-5">
+              {% for block in page.work_content %}
+                {% if block.block_type == 'work_heading' %}
+                  <h2 class="headline mb-4">{{ block.value.subheading_2 }}</h2>
+                  <h4 class="tagline mb-4">{{ block.value.tagline_2 }}</h4>
+                  <p class="workText">
+                    {{ block.value.paragraph_2 }}
+                  </p>
+                  
+                {% endif %}
+              {% endfor %}
+            </div>
+            
             
           </div>
         </div>
