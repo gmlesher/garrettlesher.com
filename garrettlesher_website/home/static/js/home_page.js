@@ -73,9 +73,9 @@ function addMask() {
 }
 addMask();
 
-
-// arrow animation
-gsap.to(".arrow", {
+if ($(window).height() >= 650) {
+    // arrow animation
+    gsap.to(".arrow", {
     scrollTrigger: {
         trigger: ".aboutRow",
         start: "top bottom",
@@ -87,4 +87,7 @@ gsap.to(".arrow", {
     rotation: -45,
     ease: "none",
     duration: 2,
-});
+    });
+
+}
+

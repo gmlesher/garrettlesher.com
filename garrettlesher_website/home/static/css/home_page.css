@@ -174,9 +174,9 @@
   padding-left: 10%;
   padding-right: 10%;
   padding-top: 15vh;
-  padding-bottom: 22vh;
-  margin-bottom: 100px;
+  padding-bottom: 300px;
   min-height: 100vh;
+  background-image: linear-gradient(185deg, var(--backgroundColor) 80%, rgba(var(--accentColorrgba), 0.2) calc(80% + 2px))
 }
 .work h1 {
   font-size: 3em;
@@ -349,8 +349,8 @@
 #projects:target::before {
   content: "";
   display: block;
-  min-height: 20vh; 
-  margin: -8vh 0 0; 
+  min-height: 24vh; 
+  margin: -24vh 0 0; 
 }
 #work:target::before {
   content: "";
@@ -372,14 +372,26 @@
   .nameDesc h4 {
     font-size: 1.4em;
   }
+  .homeRight > svg {
+    width: 50%;
+  }
 }
 
 @media (max-width: 1200px) {
   .nameDesc svg {
     font: 3.8em 'Monda';
   }
-  .homeRightText {
-    font-size: 2.5em;
+  .homeRight > svg {
+    width: 50%;
+  }
+  .headline {
+    font-size: 1.4em;
+  }
+  .tagline {
+    font-size: 1em;
+  }
+  .service > p {
+    font-size: .8em;
   }
 }
 @media (max-width: 991px) {
@@ -389,14 +401,32 @@
   .nameDesc h4 {
     font: 1em 'Monda';
   }
-  .homeRightText {
-    font-size: 1.5em;
+  .homeRight > svg {
+    width: 50%;
+  }
+  .headline {
+    font-size: 1.1em;
+  }
+  .tagline {
+    font-size: .8em;
   }
 }
 
 @media (max-width: 767px) {
+  .homeRight > svg {
+    width: 50%;
+  }
   .nameDesc svg {
     font: 3.7em 'Monda';
+  }
+  .headline {
+    font-size: 1.2rem;
+  }
+  .tagline {
+    font-size: 1rem;
+  }
+  .service > p {
+    font-size: .9rem;
   }
   .formDiv {
     width: 75% !important;
@@ -437,6 +467,9 @@
 }
 
 @media (max-width: 479px) {
+  .homeRight > svg {
+    width: 50%;
+  }
   .nameDesc svg {
     font: 2.2em 'Monda';
   }
