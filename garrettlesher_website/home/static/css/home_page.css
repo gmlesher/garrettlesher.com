@@ -364,7 +364,7 @@
   margin: -8vh 0 0; 
 }
 
-@media (min-width: 1399px) {
+@media (min-width: 1200px) {
   .nameDesc svg {
     font: 4em 'Monda';
   }
@@ -376,7 +376,7 @@
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1199px) {
   .nameDesc svg {
     font: 3.8em 'Monda';
   }
